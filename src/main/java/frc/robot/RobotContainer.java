@@ -10,10 +10,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.util.AllRobotSubsystems;
+import frc.robot.util.AutonomousLoader;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -23,18 +26,23 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveSubsystem driveSubsystem = new DriveSubsystem();
-  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  private final Drivetrain drivetrain = new Drivetrain();
+  private final Shooter shooter = new Shooter();
+  private final Elevator elevatorSubsystem = new Elevator();
+  private final Intake intakeSintakebsystem = new Intake();
 
   
   public Joystick driveController = new Joystick(0);
+
+  private AutonomousLoader autoLoader = new AutonomousLoader(new AllRobotSubsystems(drivetrain, intakeSintakebsystem, shooter));
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+
+    SmartDashboard.putData("drivetrain", drivetrain);
+
     // Configure the button bindings
     configureButtonBindings();
     // Set Default Commands
@@ -55,16 +63,16 @@ public class RobotContainer {
       JoystickButton rb = new JoystickButton(driveController, 6);
       JoystickButton lb = new JoystickButton(driveController, 5);
 
-      a.whenPressed(new HatchCommand(intakeSubsystem, true));
-      a.whenReleased(new HatchCommand(intakeSubsystem, false));
-      y.whenPressed(new BallCommand(intakeSubsystem, false));
-      y.whenReleased(new BallCommand(intakeSubsystem, true));
-      rb.whileHeld(new IntakeCommand(intakeSubsystem, -1));
-      lb.whileHeld(new IntakeCommand(intakeSubsystem, 1));
+      a.whenPressed(new HatchCommand(intakeSintakebsystem, true));
+      a.whenReleased(new HatchCommand(intakeSintakebsystem, false));
+      y.whenPressed(new BallCommand(intakeSintakebsystem, false));
+      y.whenReleased(new BallCommand(intakeSintakebsystem, true));
+      rb.whileHeld(new IntakeCommand(intakeSintakebsystem, -1));
+      lb.whileHeld(new IntakeCommand(intakeSintakebsystem, 1));
   }
 
   private void setDefaultCommands() {
-    driveSubsystem.setDefaultCommand(new DriveCommand(driveSubsystem, driveController));
+    drivetrain.setDefaultCommand(new DriveCommand(drivetrain, driveController));
     elevatorSubsystem.setDefaultCommand(new ElevatorCommand(elevatorSubsystem, driveController));
   }
 

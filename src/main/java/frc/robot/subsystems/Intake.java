@@ -17,13 +17,13 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class IntakeSubsystem extends SubsystemBase {
+public class Intake extends SubsystemBase {
 
   private VictorSPX ballGrabber;
   private Compressor comp;
   private DoubleSolenoid hatchManip, ballManip;
 
-  public IntakeSubsystem() {
+  public Intake() {
     comp = new Compressor(PneumaticsModuleType.CTREPCM);
     ballGrabber = new VictorSPX(Constants.ballGrabber);
     hatchManip = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.hatch1, Constants.hatch2);

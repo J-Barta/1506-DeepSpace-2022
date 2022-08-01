@@ -9,15 +9,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.Elevator;
 
 public class ElevatorCommand extends CommandBase {
-  private ElevatorSubsystem ss;
+  private Elevator ss;
   private Joystick js;
   /**
    * Creates a new ShooterSubsystem.
    */
-  public ElevatorCommand(ElevatorSubsystem ss, Joystick js) {
+  public ElevatorCommand(Elevator ss, Joystick js) {
     this.ss = ss;
     this.js = js;
     addRequirements(ss);

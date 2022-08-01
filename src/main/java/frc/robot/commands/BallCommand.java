@@ -8,15 +8,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.Intake;
 
 public class BallCommand extends CommandBase {
-  private IntakeSubsystem ss;
+  private Intake ss;
   private boolean open;
   /**
    * Creates a new ShooterSubsystem.
    */
-  public BallCommand(IntakeSubsystem ss, boolean open) {
+  public BallCommand(Intake ss, boolean open) {
     this.ss = ss;
     this.open = open;
     addRequirements(ss);

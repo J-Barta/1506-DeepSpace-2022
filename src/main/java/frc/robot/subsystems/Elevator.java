@@ -14,12 +14,12 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ElevatorSubsystem extends SubsystemBase {
+public class Elevator extends SubsystemBase {
 
   private VictorSPX elevator2, elevator3;
   private TalonSRX elevator1;
 
-  public ElevatorSubsystem() {
+  public Elevator() {
     elevator1 = new TalonSRX(Constants.elevator1);
     elevator2 = new VictorSPX(Constants.elevator2);
     elevator3 = new VictorSPX(Constants.elevator3);

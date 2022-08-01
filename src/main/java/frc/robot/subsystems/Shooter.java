@@ -9,13 +9,12 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
-public class ShooterSubsystem extends SubsystemBase {
+public class Shooter extends SubsystemBase {
 
   private VictorSP shooter_l, shooter_r;
 
-  public ShooterSubsystem() {
+  public Shooter() {
     //shooter_l = new VictorSP(Constants.shooter_l);
     // shooter_r = new VictorSP(Constants.shooter_r);
   }
