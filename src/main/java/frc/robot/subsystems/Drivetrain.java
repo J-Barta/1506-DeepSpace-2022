@@ -56,27 +56,50 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     //TODO : update odometry
+
+    odo.update(getNavX(), getLeftPos(), getRightPos());
+
     //TODO: Run PID loops
+  }
+
+  public void resetOdometry(Pose2d resetPose) {
+    
+  }
+
+
+  /**
+   * m/s^2
+   */
+  public double getLeftVelo() {
+    return encoderPosToMeters(-l1_drive.getSelectedSensorVelocity() * 10);
   }
 
   /**
    * m/s
-   * @return
    */
-  public double getLeftVelo() {
-    return -l1_drive.getSelectedSensorVelocity();
-  }
-
   public double getLeftPos() {
-    return -l1_drive.getSelectedSensorPosition();
+    return encoderPosToMeters(-l1_drive.getSelectedSensorPosition());
   }
 
+  /**
+   * m/s^2
+   */
   public double getRightVelo() {
-    return -r1_drive.getSelectedSensorVelocity();
+    return encoderPosToMeters(-r1_drive.getSelectedSensorVelocity() * 10);
   }
 
+  /**
+   * m/s
+   */
   public double getRightPos() {
-    return -r1_drive.getSelectedSensorPosition();
+    return encoderPosToMeters(-r1_drive.getSelectedSensorPosition());
+  }
+
+  public double encoderPosToMeters(double ticks) {
+    return 
+    (ticks / 1024) //Revolutions
+    * (6 * Math.PI) //Distance (inches)
+    * (0.0254); //Distance (meters)
   }
 
   public Rotation2d getNavX() {
@@ -95,10 +118,10 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void initSendable(SendableBuilder builder ) {
     super.initSendable(builder);
-    builder.addDoubleProperty("l1_encoder_pos", () -> getLeftPos(), null);
-    builder.addDoubleProperty("l1_encoder_velo", () -> getLeftVelo(), null);
+    builder.addDoubleProperty("l1 meters", () -> getLeftPos(), null);
+    builder.addDoubleProperty("l1 velo", () -> getLeftVelo(), null);
 
-    builder.addDoubleProperty("r1_encoder_pos", () -> getRightPos(), null);
-    builder.addDoubleProperty("r1_encoder_velo", () -> getRightVelo(), null);
+    builder.addDoubleProperty("r1 meters", () -> getRightPos(), null);
+    builder.addDoubleProperty("r1 velo", () -> getRightVelo(), null);
   }
 }
