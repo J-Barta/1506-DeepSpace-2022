@@ -79,6 +79,18 @@ public class Drivetrain extends SubsystemBase {
     return -r1_drive.getSelectedSensorPosition();
   }
 
+  public Rotation2d getNavX() {
+    return Rotation2d.fromDegrees(navX.getAngle());
+  }
+
+  public void setAdditionGyroAngle(Rotation2d angle) {
+    navX.setAngleAdjustment(angle.getDegrees());
+  }
+
+  public void resetNavX() {
+    navX.reset();
+  }
+
 
   @Override
   public void initSendable(SendableBuilder builder ) {
