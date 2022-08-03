@@ -103,7 +103,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public Rotation2d getNavX() {
-    return Rotation2d.fromDegrees(navX.getAngle());
+    return Rotation2d.fromDegrees(Math.IEEERemainder(-navX.getAngle(), 360));
   }
 
   public void setAdditionGyroAngle(Rotation2d angle) {
